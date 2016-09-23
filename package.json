@@ -1,0 +1,23 @@
+{
+  "name": "getyourbus",
+  "version": "0.1.0",
+  "description": "A macOs Sierra application to alert when your bus is coming",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "electron ./src",
+    "build": "electron-packager ./src Getyourbus --platform=darwin --arch=x64"
+  },
+  "author": "Gaël Reyrol <gael@soyhuce.fr>",
+  "license": "MIT",
+  "dependencies": {
+    "cron": "^1.1.0",
+    "menubar": "^5.1.0",
+    "moment": "^2.15.1",
+    "node-notifier": "^4.6.1"
+  },
+  "devDependencies": {
+    "electron-packager": "^8.0.0",
+    "electron-prebuilt": "^1.4.1",
+    "eslint": "^3.5.0"
+  }
+}
