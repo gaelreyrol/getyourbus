@@ -32,17 +32,40 @@ function getNextBuses() {
   return nextBuses;
 }
 
+function notifyNextBus(minutes) {
+  const message = 'Prochain bus dans ' + minutes + ' minutes';
+
+  notifier.notify({
+    icon: path.join(__dirname, 'iconTemplate@2x.png'),
+    contentImage: 0,
+    title: 'Get your bus',
+    message: message
+  });
+  console.log(message);
+}
+
 const job = new CronJob('* * * * *', () => {
   const now = moment();
   if (now.isAfter(startNotificationHour)) {
     const nextBuses = getNextBuses();
 
-    notifier.notify({
-      icon: path.join(__dirname, 'iconTemplate@2x.png'),
-      contentImage: 0,
-      title: 'Get your bus',
-      message: 'Prochain bus dans ' + nextBuses[0] + ' minutes'
-    });
+    if (nextBuses.length >= 1) {
+      const nextBus = nextBuses[0];
+
+      switch (nextBus) {
+      case 15:
+      case 10:
+      case 8:
+      case 4:
+      case 2:
+      case 1:
+        notifyNextBus(nextBus);
+        break;
+      default:
+        break;
+      }
+    }
+
   }
 
 }, () => {
